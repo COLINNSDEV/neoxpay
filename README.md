@@ -37,34 +37,40 @@
 
 [x] Blindagem de Webhook (Verificação criptográfica de assinatura para evitar fakes)
 
-[x] Simulador de Vendas (Ferramenta interna para testar o dashboard sem gastar dinheiro)
+[x] Simulador de Vendas (Ferramenta interna para testar o dashboard com notificações PWA nativas)
 
-🛡️ Módulo 4: Segurança Industrial (O "Cofre")
+🛡️ Módulo 4: Segurança Industrial e AppSec (O "Cofre")
 [x] Isolamento de Chaves (.env) (Senhas e APIs escondidas do código-fonte)
 
-[x] Prevenção de Saque Duplo (Travamento de banco with_for_update contra hackers)
+[x] Criptografia Fail-Safe (Fernet) (Tokens do Telegram criptografados no banco. Se a chave falhar, o sistema bloqueia em vez de vazar o dado)
 
-[x] Bloqueio IDOR (Trava para impedir que um usuário edite o robô do outro)
+[x] Prevenção de Saque Duplo (Travamento de banco with_for_update contra requisições fantasmas/simultâneas)
 
-[x] Rate Limit Antifraude (Bloqueio automático de IP por excesso de tentativas de login)
+[x] Bloqueio IDOR Absoluto (Trava para impedir que um usuário edite, delete ou acesse os planos e robôs de outros)
 
-[x] Upload Seguro (Filtro de extensões e secure_filename contra scripts maliciosos)
+[x] Rate Limit Inteligente (ProxyFix) (Bloqueio de IP por tentativas de login lendo o IP real do hacker por trás do Cloudflare, persistido no SQLite)
 
-[x] Sistema de Banimento (Botão de "Ban" para congelar contas de golpistas)
+[x] Upload de Arquivo "Magic Bytes" (Verificação do DNA do arquivo via python-magic + renomeação forçada por uuid, aniquilando Web Shells e RCE)
+
+[x] Sistema de Banimento "Insta-Kill" (Derruba a sessão ativa instantaneamente via Middleware se o usuário for banido pelo Admin)
+
+[x] Proteção Anti-XSS (Bleach) (Sanitização cirúrgica de inputs: limpa scripts maliciosos mas mantém a formatação em negrito/itálico do Telegram)
+
+[x] Defesa Anti-CSRF Estrita (Middleware API) (Validação rigorosa de Origin, Referer e Content-Type, substituindo a necessidade de tokens de HTML antigos)
+
+[x] Cabeçalhos de Segurança (CSP) (Bloqueio de Clickjacking, restrição de origens de scripts e proteção contra espionagem de sessão via SameSite=Strict)
 
 🚧 O QUE FALTA (Os Próximos Passos)
-🚪 Pós-Venda e Retenção
-[ ] Controle de Recorrência (Script para expulsar o usuário do Telegram após o vencimento do plano)
+🚪 Pós-Venda e Retenção (O Motor de Faturamento)
+[ ] Controle de Recorrência (Script agendado para expulsar automaticamente o usuário do grupo Telegram após o vencimento dos dias do plano)
 
-[ ] Remarketing de 15 Minutos (Disparo automático para quem gerou PIX e não pagou)
+[ ] Remarketing de 15 Minutos (O frontend já está pronto, falta o script de disparo em background para quem gerou PIX e não pagou)
 
-[ ] Checkout Abandonado (E-mail ou mensagem se o cara fechou a tela de pagamento)
+[ ] Checkout Abandonado (Motor para identificar quem não clicou em pagar no Telegram e disparar áudio/texto de recuperação)
 
-🏗️ Infraestrutura e Escala
-[ ] Modularização (Blueprints) (Dividir o app.py em arquivos menores: auth.py, billing.py, etc.)
+🏗️ Infraestrutura e Escala (Para quando bater 10.000 clientes)
+[ ] Modularização (Blueprints) (Dividir o "monolito" app.py em arquivos menores: routes/auth.py, routes/billing.py, etc., para facilitar a vida da sua futura equipe de devs)
 
-[ ] Migração PostgreSQL (Sair do SQLite para aguentar milhares de acessos simultâneos)
+[ ] Migração PostgreSQL (O código já tem suporte, falta apenas criar o banco na nuvem e colocar o link no .env para substituir o SQLite local)
 
-[ ] Processamento Assíncrono (Celery/Redis) (Para o site não travar enquanto o Telegram envia áudios pesados)
-
-[ ] Proteção CSRF Completa (Adicionar tokens em todos os formulários das páginas HTML)
+[ ] Processamento Assíncrono (Celery + Redis) (Substituir o atual ThreadPoolExecutor para garantir que o site nunca fique lento, mesmo se o robô do Telegram estiver enviando 5.000 áudios pesados ao mesmo tempo)
