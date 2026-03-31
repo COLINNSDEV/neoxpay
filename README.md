@@ -1,3 +1,4 @@
+🚀 NeoxPay - Gateway & Telegram Automation Hub
 🌐 Módulo 1: Painel Web (Dashboard & Management)
 [x] Interface de Criação de Grupos (Foto, nome, token, descrição)
 
@@ -5,7 +6,11 @@
 
 [x] Validação de Conexão (Verificação via código de 14 dígitos)
 
-[x] Criação de Produtos Avulsos (Ebooks/Packs)
+[x] Criação de Produtos Avulsos (Ebooks/Packs/Conteúdos Exclusivos)
+
+[x] Configuração de Remarketing Dinâmico (Interface Liquid Glass iOS para criar ofertas por plano, tempo de disparo e público-alvo)
+
+[x] Puxada Automática de Dados (O sistema lê os planos e conteúdos já criados no bot e gera os cards de oferta automaticamente)
 
 [x] Cadastro de Contas Bancárias (Gerenciamento de Chaves PIX)
 
@@ -42,35 +47,42 @@
 🛡️ Módulo 4: Segurança Industrial e AppSec (O "Cofre")
 [x] Isolamento de Chaves (.env) (Senhas e APIs escondidas do código-fonte)
 
-[x] Criptografia Fail-Safe (Fernet) (Tokens do Telegram criptografados no banco. Se a chave falhar, o sistema bloqueia em vez de vazar o dado)
+[x] Criptografia Fail-Safe (Fernet) (Tokens do Telegram criptografados no banco)
 
-[x] Prevenção de Saque Duplo (Travamento de banco with_for_update contra requisições fantasmas/simultâneas)
+[x] Prevenção de Saque Duplo (Travamento de banco with_for_update contra requisições simultâneas)
 
-[x] Bloqueio IDOR Absoluto (Trava para impedir que um usuário edite, delete ou acesse os planos e robôs de outros)
+[x] Bloqueio IDOR Absoluto (Trava de segurança para impedir que usuários editem dados de outros)
 
-[x] Rate Limit Inteligente (ProxyFix) (Bloqueio de IP por tentativas de login lendo o IP real do hacker por trás do Cloudflare, persistido no SQLite)
+[x] Rate Limit Inteligente (ProxyFix) (Bloqueio de IP por tentativas de login lendo IP real via Cloudflare)
 
-[x] Upload de Arquivo "Magic Bytes" (Verificação do DNA do arquivo via python-magic + renomeação forçada por uuid, aniquilando Web Shells e RCE)
+[x] Upload de Arquivo "Magic Bytes" (Verificação do DNA do arquivo + renomeação por UUID)
 
-[x] Sistema de Banimento "Insta-Kill" (Derruba a sessão ativa instantaneamente via Middleware se o usuário for banido pelo Admin)
+[x] Sistema de Banimento "Insta-Kill" (Derruba a sessão ativa instantaneamente se o usuário for banido)
 
-[x] Proteção Anti-XSS (Bleach) (Sanitização cirúrgica de inputs: limpa scripts maliciosos mas mantém a formatação em negrito/itálico do Telegram)
+[x] Proteção Anti-XSS (Bleach) (Sanitização cirúrgica de inputs mantendo formatação do Telegram)
 
-[x] Defesa Anti-CSRF Estrita (Middleware API) (Validação rigorosa de Origin, Referer e Content-Type, substituindo a necessidade de tokens de HTML antigos)
+[x] Defesa Anti-CSRF Estrita (Validação rigorosa de Origin e Referer via Middleware)
 
-[x] Cabeçalhos de Segurança (CSP) (Bloqueio de Clickjacking, restrição de origens de scripts e proteção contra espionagem de sessão via SameSite=Strict)
+[x] Cabeçalhos de Segurança (CSP) (Bloqueio de Clickjacking e SameSite=Strict)
 
 🚧 O QUE FALTA (Os Próximos Passos)
 🚪 Pós-Venda e Retenção (O Motor de Faturamento)
-[ ] Controle de Recorrência (Script agendado para expulsar automaticamente o usuário do grupo Telegram após o vencimento dos dias do plano)
+[ ] Controle de Recorrência (Script para expulsar automaticamente o usuário do Telegram após o vencimento do plano)
 
-[ ] Remarketing de 15 Minutos (O frontend já está pronto, falta o script de disparo em background para quem gerou PIX e não pagou)
+[ ] Motor de Disparo de Remarketing (Script de background para processar os tempos de disparo configurados e enviar as cópias/mídias via bot)
 
-[ ] Checkout Abandonado (Motor para identificar quem não clicou em pagar no Telegram e disparar áudio/texto de recuperação)
+[ ] Checkout Abandonado Avançado (Identificar quem iniciou o fluxo no Telegram mas não gerou o pagamento para recuperação ativa)
 
-🏗️ Infraestrutura e Escala (Para quando bater 10.000 clientes)
-[ ] Modularização (Blueprints) (Dividir o "monolito" app.py em arquivos menores: routes/auth.py, routes/billing.py, etc., para facilitar a vida da sua futura equipe de devs)
+🏗️ Infraestrutura e Escala (Para 10.000+ clientes)
+[ ] Modularização (Blueprints) (Dividir o app.py em rotas separadas: auth, finance, bot, admin)
 
-[ ] Migração PostgreSQL (O código já tem suporte, falta apenas criar o banco na nuvem e colocar o link no .env para substituir o SQLite local)
+[ ] Migração PostgreSQL (Mudar o SQLite local para um banco de dados em nuvem de alta performance)
 
-[ ] Processamento Assíncrono (Celery + Redis) (Substituir o atual ThreadPoolExecutor para garantir que o site nunca fique lento, mesmo se o robô do Telegram estiver enviando 5.000 áudios pesados ao mesmo tempo)
+[ ] Processamento Assíncrono (Celery + Redis) (Garantir que envios em massa não travem o servidor principal)
+
+🔒 Reforço de Segurança (Hardening)
+[ ] Login Captcha (Proteção contra ataques de força bruta automatizados no login)
+
+[ ] Criptografia de HTML (Ofuscação do código fonte no cliente para dificultar a cópia do design/lógica do front)
+
+[ ] 2FA (Autenticação em Duas Etapas) (Token via Telegram ou E-mail para saques e login admin)
