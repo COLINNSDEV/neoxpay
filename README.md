@@ -1,4 +1,4 @@
-O Gemini disse
+
 Seu projeto evoluiu absurdamente desde a primeira versão. Nós saímos de um script simples com SQLite para uma arquitetura escalável em nuvem, com banco de dados robusto (PostgreSQL), filas de processamento assíncrono (Celery + Redis), integração com a Shark Banking e uma interface PWA padrão Apple.
 
 Aqui está o seu README.md completamente atualizado, refletindo o verdadeiro poder do sistema que construímos até agora. É só copiar e colar no seu GitHub:
