@@ -1,11 +1,4 @@
 
-Seu projeto evoluiu absurdamente desde a primeira versão. Nós saímos de um script simples com SQLite para uma arquitetura escalável em nuvem, com banco de dados robusto (PostgreSQL), filas de processamento assíncrono (Celery + Redis), integração com a Shark Banking e uma interface PWA padrão Apple.
-
-Aqui está o seu README.md completamente atualizado, refletindo o verdadeiro poder do sistema que construímos até agora. É só copiar e colar no seu GitHub:
-
-🚀 NeoxPay - Gateway & Telegram Automation Hub
-A NeoxPay é uma infraestrutura de pagamentos e automação de vendas focada no ecossistema do Telegram. Desenvolvida para lojistas e infoprodutores que desejam escalar operações globais, a plataforma une a gestão de checkouts multimoeda (BRL, USD, EUR) com a entrega automatizada de acessos a grupos VIP e conteúdos exclusivos, tudo através de uma interface PWA ultrarrápida estilo Liquid Glass iOS.
-
 🏗️ Stack Tecnológica (Infraestrutura Escalonável)
 Backend: Python 3.11, Flask (Modularizado com Blueprints)
 
