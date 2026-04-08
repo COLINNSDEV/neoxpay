@@ -1,89 +1,73 @@
 
-🏗️ Stack Tecnológica (Infraestrutura Escalonável)
-Backend: Python 3.11, Flask (Modularizado com Blueprints)
 
-Banco de Dados: PostgreSQL (Alta performance e concorrência)
+## 🏗️ Stack Tecnológica (Infraestrutura Escalonável)
 
-Mensageria & Filas: Celery + Redis (Processamento assíncrono de webhooks e remarketing)
+* **Backend:** Python 3.11, Flask (Arquitetura modularizada com Blueprints).
+* **Banco de Dados:** PostgreSQL (Projetado para alta performance e concorrência).
+* **Mensageria & Filas:** Celery + Redis (Processamento assíncrono de webhooks, entregas e motor de remarketing).
+* **Frontend:** HTML5, CSS3, Vanilla JS (Design **Liquid Glass iOS**, 100% responsivo e suporte a PWA).
+* **Gateways de Pagamento:** **Shark Banking** (PIX Nativo e Saques BRL via API) & **Stripe** (Checkout global para cartões USD/EUR/GBP).
+* **Storage:** AWS S3 (Armazenamento em nuvem de alta disponibilidade para mídias e áudios).
 
-Frontend: HTML5, CSS3, Vanilla JS (Design Liquid Glass, responsivo e PWA)
+---
 
-Gateways: Shark Banking (PIX e Saques BRL) & Stripe (Cartões USD/EUR)
+## 🌐 Módulo 1: Painel Web (Dashboard & Management)
 
-Storage: AWS S3 (Armazenamento em nuvem para mídias e áudios)
+* **Interface Liquid Glass iOS:** UI premium com abas dinâmicas, glassmorphism real e animações fluidas baseadas no ecossistema Apple.
+* **Criação de Bots com Validação Real-time:** Limite de 18 bots por conta com verificação imediata de Token via API oficial do Telegram (`get_me()`).
+* **Sistema Multimoedas:** Pricing dinâmico com conversão simultânea e independente para BRL, USD e EUR.
+* **Criação de Produtos Avulsos:** Venda de E-books, planilhas ou links externos através de botões de redirecionamento no Telegram.
+* **Remarketing Dinâmico:** Motor de recuperação de vendas programável por plano, tempo de disparo e segmentação de público (Ativos, Inativos e Abandonos).
+* **Puxada Automática de Dados:** O sistema lê os planos e conteúdos cadastrados no banco e gera os cards de oferta automaticamente na interface.
+* **Notificações Push (PWA):** Integração via Service Worker e VAPID para avisos nativos no celular (Notificação de PIX gerado e Venda Aprovada).
+* **Painel Administrativo "Visão de Deus":** Gestão centralizada de lucro líquido, volume total processado e controle de taxas da plataforma.
+* **Central de Atendimento Pró:** Ferramenta de busca por TX ID (Transaction ID), aprovação manual de saques, suspensão de lojas e reenvio de acessos.
+* **Gestão de Equipe:** Criação de sub-contas para atendentes com permissões granulares e controle de exclusão.
 
-🌐 Módulo 1: Painel Web (Dashboard & Management)
-[x] Interface Liquid Glass iOS: UI premium com abas dinâmicas, glassmorphism e animações fluidas.
+---
 
-[x] Criação de Bots com Validação Real-time: Limite de 18 bots por conta com verificação imediata do Token na API do Telegram (via get_me()).
+## 🤖 Módulo 2: O Robô do Telegram (Experiência do Cliente)
 
-[x] Sistema Multimoedas: Pricing dinâmico com conversão simultânea para BRL, USD e EUR.
+* **Comando /start Dinâmico:** O bot lê as configurações do painel em tempo real e inicia o atendimento personalizado chamando o cliente pelo nome.
+* **Funil Multi-idioma Automático:** Sistema inteligente que pergunta o idioma (PT, EN, ES) e adapta textos, moedas e botões dinamicamente.
+* **Entrega Inteligente de Acessos:** Algoritmo que detecta o tipo de produto: entrega links externos protegidos ou gera convites de uso único para Grupos/Canais VIP.
+* **Áudios Humanizados:** Envio de mensagens de voz nativas (.ogg) nos momentos de recepção, conversão e remarketing para aumentar a autoridade.
+* **Mídia Específica por País:** Suporte para imagens e vídeos diferentes dependendo do idioma escolhido pelo cliente no funil.
 
-[x] Criação de Produtos Avulsos: Venda de E-books, planilhas ou links externos via botões no Telegram.
+---
 
-[x] Remarketing Dinâmico: Motor de recuperação de vendas programável por plano, tempo de disparo e público-alvo (Ativos, Inativos, Abandonos).
+## 💳 Módulo 3: Gateway de Pagamento & Checkout
 
-[x] Puxada Automática de Dados: O sistema lê os planos e conteúdos do bot e gera os cards de oferta automaticamente.
+* **Integração Checkout Stripe:** Sessões de pagamento seguras e otimizadas para tráfego internacional e cartões de crédito.
+* **Sistema PIX Oficial (Shark Banking):** Geração nativa e instantânea de código "Copia e Cola" e QR Code dinâmico.
+* **Motor de Saques via API:** Liquidação de saldo direta do painel (após aprovação administrativa) integrando a chave de saque externa da Shark Banking.
+* **Blindagem de Webhook:** Arquitetura orientada a eventos (Celery) para dar resposta imediata de "200 OK" aos gateways e processar a entrega em background, eliminando timeouts.
 
-[x] Notificações Push (PWA): Integração via Service Worker e VAPID para avisos nativos no celular (PIX gerado, Venda Aprovada).
+---
 
-[x] Painel Administrativo "Visão de Deus": Gestão de lucro líquido, volume total e controle de taxas da plataforma.
+## 🛡️ Módulo 4: Segurança Industrial e AppSec (O "Cofre")
 
-[x] Central de Atendimento Pró: Busca por TX ID, aprovação manual de saques, suspensão de lojas e reenvio de acessos.
+* **Isolamento de Chaves (.env):** Camada de proteção para credenciais de API, senhas de banco e chaves criptográficas fora do código-fonte.
+* **Criptografia Fail-Safe (Fernet):** Tokens de bots e dados sensíveis dos lojistas armazenados com criptografia simétrica de ponta a ponta.
+* **Prevenção de Saque Duplo:** Travamento de banco via `with_for_update()` para impedir "race conditions" em tentativas de saques simultâneos.
+* **Bloqueio IDOR Absoluto:** Validação rigorosa em todas as rotas garantindo que usuários acessem apenas dados vinculados ao seu próprio `user_id`.
+* **Rate Limit Inteligente:** Proteção contra ataques de força bruta (Brute Force) no login e em endpoints públicos de pagamento.
+* **Upload Seguro "Magic Bytes":** Verificação do DNA binário do arquivo, impedindo o upload de scripts maliciosos disfarçados de imagem no AWS S3.
+* **Proteção Anti-XSS (Bleach):** Sanitização cirúrgica de inputs de texto, permitindo apenas as tags HTML seguras aceitas pelo Telegram.
 
-[x] Gestão de Equipe: Criação de sub-contas (Atendentes) com permissões granulares e exclusão.
+---
 
-🤖 Módulo 2: O Robô do Telegram
-[x] Comando /start Dinâmico: O bot lê as configurações do painel em tempo real e chama o cliente pelo nome.
+## 🚧 Roadmap & Próximos Passos
 
-[x] Funil Multi-idioma Automático: Pergunta o idioma (PT, EN, ES) e altera textos, moedas e botões dinamicamente.
+### 🚪 Pós-Venda e Retenção
+- [ ] **Controle de Recorrência Inteligente:** Script de varredura (Celery Beat) para identificar assinaturas vencidas e expulsar automaticamente o usuário via API.
+- [ ] **Checkout Abandonado Avançado:** Identificação de usuários que abriram o checkout externo mas não concluíram, acionando recuperação agressiva.
 
-[x] Entrega Inteligente de Acessos: Se o painel contiver um link externo (Ex: Google Drive, Instagram), o bot entrega um botão de redirecionamento. Caso contrário, gera um convite de uso único para o Grupo VIP.
+### 🔒 Reforço de Segurança (Hardening)
+- [ ] **Login Captcha Invisível:** Implementação de Cloudflare Turnstile ou reCAPTCHA v3 nas rotas de autenticação.
+- [ ] **Autenticação em Duas Etapas (2FA):** Confirmação via código para saques de alto valor e acesso administrativo.
+- [ ] **Ofuscação de Front-end:** Proteção extra do código JS para dificultar engenharia reversa do design exclusivo.
 
-[x] Áudios Humanizados: Envio de mensagens de voz nativas (.ogg) na recepção, conversão e remarketing.
+---
 
-[x] Mídia Específica por País: Suporte para imagens e vídeos diferentes dependendo do idioma escolhido pelo cliente.
-
-💳 Módulo 3: Gateway de Pagamento
-[x] Integração Checkout Stripe: Sessões seguras para tráfego internacional (USD/EUR).
-
-[x] Sistema PIX Oficial (Shark Banking): Geração nativa de código Copia e Cola e QR Code.
-
-[x] Motor de Saques via API: Liquidação de saldo direto do painel (com aprovação de administradores) integrando a chave de saque externo da Shark.
-
-[x] Blindagem de Webhook: Threads Nativas do Python para dar resposta imediata de "200 OK" à Stripe/SharkBanking e enviar o processamento de entrega para background sem travar a API.
-
-⚙️ Módulo 4: Arquitetura e Escala (Performance)
-[x] Modularização (Blueprints): Código reestruturado separando rotas públicas, painel, admin, background tasks e banco de dados.
-
-[x] Processamento Assíncrono (Celery + Redis): Motor pesado rodando em background para disparar centenas de mensagens de remarketing sem derrubar o servidor Flask.
-
-[x] Migração para PostgreSQL: Saída do SQLite para suporte a milhares de requisições simultâneas em produção.
-
-🛡️ Módulo 5: Segurança Industrial e AppSec (O "Cofre")
-[x] Isolamento de Chaves (.env): Senhas, APIs da Shark/Stripe e chaves VAPID ocultas do código-fonte.
-
-[x] Criptografia Fail-Safe (Fernet): Tokens de bots dos lojistas armazenados com criptografia de ponta a ponta no banco.
-
-[x] Prevenção de Saque Duplo: Travamento de banco with_for_update() para impedir "race conditions" em saques simultâneos.
-
-[x] Bloqueio IDOR Absoluto: Validação rigorosa garantindo que lojistas só acessem ou deletem dados (Bots, Campanhas, Saques) vinculados ao seu próprio user_id.
-
-[x] Rate Limit Inteligente: Bloqueio contra ataques de força bruta no login e em endpoints públicos.
-
-[x] Upload Seguro "Magic Bytes": O sistema ignora a extensão do arquivo e lê o DNA binário, impedindo upload de scripts maliciosos disfarçados de imagem no AWS S3.
-
-[x] Proteção Anti-XSS (Bleach): Sanitização cirúrgica de inputs de texto (mensagens do bot), permitindo apenas tags HTML seguras aceitas pelo Telegram.
-
-🚧 O QUE FALTA (Roadmap & Próximos Passos)
-🚪 Pós-Venda e Retenção
-[ ] Controle de Recorrência Inteligente: Script de varredura (Celery Beat) para identificar assinaturas vencidas e expulsar automaticamente o usuário do grupo no Telegram via API.
-
-[ ] Checkout Abandonado Avançado: Identificar usuários que clicaram no botão de pagamento dentro da Stripe/Shark mas fecharam a aba, acionando um script de recuperação agressiva no Telegram.
-
-🔒 Reforço de Segurança (Hardening Front-end)
-[ ] Login Captcha Invisível: Implementação de Cloudflare Turnstile ou reCAPTCHA v3 na rota de login e registro.
-
-[ ] Autenticação em Duas Etapas (2FA): Confirmação via código no E-mail para permitir saques altos e acesso ao painel de Administrador.
-
-[ ] Criptografia de Front-end: Ofuscação pesada do HTML/JS para dificultar engenharia reversa do design exclusivo Liquid Glass.
+> **Desenvolvido para máxima performance e conversão.** NeoxPay V2 — Redefinindo o padrão de vendas no Telegram.
