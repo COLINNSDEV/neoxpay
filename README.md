@@ -1,8 +1,3 @@
-Aqui está a estrutura de documentação (README) definitiva para o seu GitHub.
-
-Como nós resolvemos a maioria dos itens críticos que estavam no seu Roadmap anterior (como o Filtro L7 em memória e a otimização O(log N) do Celery), eu já movi essas conquistas para as "Features Concluídas" e destaquei a arquitetura corporativa que construímos.
-
-Copie e cole o código abaixo no seu arquivo README.md:
 
 🚀 NeoxPay V2 | Enterprise Telegram Gateway & SaaS Platform
 📅 Atualizado em: 17 de Abril de 2026
