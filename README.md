@@ -3,7 +3,7 @@
 📅 Atualizado em: 17 de Abril de 2026
 Status: Production-Ready | Qualidade da Arquitetura: A+
 
-O NeoxPay V2 é uma infraestrutura de pagamentos global e automação de comunidades (SaaS). Projetado com princípios rígidos de Service-Oriented Architecture (SOA), o sistema orquestra vendas em múltiplas moedas, entrega de infoprodutos e gestão de assinaturas VIP no Telegram, garantindo resiliência, alta disponibilidade e segurança de grau bancário (Fintech-grade).
+O NeoxPay V2 é uma infraestrutura de pagamentos global e automação de comunidades (SaaS). Projetado com princípios rígidos de Service-Oriented Architecture (SOA)
 
 🏗️ Stack Tecnológica (Infraestrutura Escalável)
 Backend: Python 3.11+, Flask (Controladores Anêmicos e Service Layer).
